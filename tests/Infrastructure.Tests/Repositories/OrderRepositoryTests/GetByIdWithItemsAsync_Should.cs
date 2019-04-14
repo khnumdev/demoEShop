@@ -12,13 +12,13 @@
     [TestClass]
     public class GetByIdWithItemsAsync_Should
     {
-        private readonly CatalogContext _catalogContext;
-        private readonly OrderRepository _orderRepository;
+        private CatalogContext _catalogContext;
+        private OrderRepository _orderRepository;
         private OrderBuilder OrderBuilder { get; } = new OrderBuilder();
-        private readonly ITestOutputHelper _output;
-        public GetByIdWithItemsAsync_Should(ITestOutputHelper output)
+
+        [TestInitialize]
+        public void Setup()
         {
-            _output = output;
             var dbOptions = new DbContextOptionsBuilder<CatalogContext>()
                 .UseInMemoryDatabase(databaseName: "TestCatalog")
                 .Options;

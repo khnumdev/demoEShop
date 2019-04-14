@@ -11,15 +11,14 @@
     [TestClass]
     public class DeleteAsync_Should
     {
-        private readonly CatalogContext _catalogContext;
-        private readonly EfRepository<Basket> _basketRepository;
-        private readonly EfRepository<BasketItem> _basketItemRepository;
+        private CatalogContext _catalogContext;
+        private EfRepository<Basket> _basketRepository;
+        private EfRepository<BasketItem> _basketItemRepository;
         private BasketBuilder BasketBuilder { get; } = new BasketBuilder();
-        private readonly ITestOutputHelper _output;
 
-        public DeleteAsync_Should(ITestOutputHelper output)
+        [TestInitialize]
+        public void Setup()
         {
-            _output = output;
             var dbOptions = new DbContextOptionsBuilder<CatalogContext>()
                 .UseInMemoryDatabase(databaseName: "TestCatalog")
                 .Options;

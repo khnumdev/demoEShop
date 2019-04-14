@@ -10,13 +10,13 @@
     [TestClass]
     public class GetById
     {
-        private readonly CatalogContext _catalogContext;
-        private readonly OrderRepository _orderRepository;
+        private CatalogContext _catalogContext;
+        private OrderRepository _orderRepository;
         private OrderBuilder OrderBuilder { get; } = new OrderBuilder();
-        private readonly ITestOutputHelper _output;
-        public GetById(ITestOutputHelper output)
+        
+        [TestInitialize]
+        public void Setup()
         {
-            _output = output;
             var dbOptions = new DbContextOptionsBuilder<CatalogContext>()
                 .UseInMemoryDatabase(databaseName: "TestCatalog")
                 .Options;
@@ -31,7 +31,6 @@
             _catalogContext.Orders.Add(existingOrder);
             _catalogContext.SaveChanges();
             int orderId = existingOrder.Id;
-            _output.WriteLine($"OrderId: {orderId}");
 
             var orderFromRepo = await _orderRepository.GetByIdAsync(orderId);
             Assert.AreEqual(OrderBuilder.TestBuyerId, orderFromRepo.BuyerId);

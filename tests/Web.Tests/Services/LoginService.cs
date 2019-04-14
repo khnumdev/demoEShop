@@ -1,16 +1,17 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Xunit;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.eShopWeb.Infrastructure.Identity;
-using System;
-using Microsoft.AspNetCore.Identity;
-using System.Threading.Tasks;
-
-namespace Microsoft.eShopWeb.IntegrationTests.Repositories.OrderRepositoryTests
+﻿namespace Microsoft.eShopWeb.Web.Tests.Services
 {
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.EntityFrameworkCore;
+    using Microsoft.eShopWeb.Infrastructure.Identity;
+    using Microsoft.Extensions.DependencyInjection;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using System;
+    using System.Threading.Tasks;
+
+    [TestClass]
     public class LoginService
     {
-        [Fact]
+        [TestMethod]
         public async Task LogsInSampleUser()
         {
             var services = new ServiceCollection()
@@ -43,7 +44,7 @@ namespace Microsoft.eShopWeb.IntegrationTests.Repositories.OrderRepositoryTests
 
                     var result = await signInManager.PasswordSignInAsync(email, password, false, lockoutOnFailure: false);
 
-                    Assert.True(result.Succeeded);
+                    Assert.IsTrue(result.Succeeded);
 
                 }
                 catch (Exception)

@@ -1,7 +1,7 @@
 ﻿namespace Microsoft.eShopWeb.ApplicationCore.Tests.Entities.OrderTests
 {
     using Microsoft.eShopWeb.ApplicationCore.Entities.OrderAggregate;
-    using Microsoft.eShopWeb.UnitTests.Builders;
+    using Microsoft.eShopWeb.Tests.Common.Builders;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using System.Collections.Generic;
 
