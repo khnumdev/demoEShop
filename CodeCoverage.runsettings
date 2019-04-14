@@ -103,4 +103,7 @@ Included items must then not match any entries in the exclude list to remain inc
       </DataCollector>
     </DataCollectors>
   </DataCollectionRunSettings>
+  <TestRunParameters>
+    <Parameter name="AppUrl" value="http://localhost:17469" />
+  </TestRunParameters>
 </RunSettings>
