@@ -2,7 +2,9 @@
 {
     using Microsoft.eShopWeb.ApplicationCore.Entities.OrderAggregate;
     using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
 
+    [ExcludeFromCodeCoverage]
     public class OrderBuilder
     {
         private Order _order;

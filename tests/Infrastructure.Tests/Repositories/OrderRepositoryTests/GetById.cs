@@ -4,10 +4,13 @@
     using Microsoft.eShopWeb.Infrastructure.Data;
     using Microsoft.eShopWeb.Tests.Common.Builders;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
     using System.Threading.Tasks;
 
     [TestClass]
+    [ExcludeFromCodeCoverage]
+    [TestCategory("Integration")]
     public class GetById
     {
         private CatalogContext _catalogContext;

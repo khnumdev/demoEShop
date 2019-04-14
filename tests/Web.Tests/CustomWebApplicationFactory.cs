@@ -11,7 +11,9 @@
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Logging;
     using System;
+    using System.Diagnostics.CodeAnalysis;
 
+    [ExcludeFromCodeCoverage]
     public class CustomWebApplicationFactory<TStartup>
     : WebApplicationFactory<Startup>
     {

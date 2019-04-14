@@ -6,10 +6,13 @@
     using Microsoft.eShopWeb.Tests.Common.Builders;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
     using System.Threading.Tasks;
 
     [TestClass]
+    [ExcludeFromCodeCoverage]
+    [TestCategory("Integration")]
     public class GetByIdWithItemsAsync_Should
     {
         private CatalogContext _catalogContext;

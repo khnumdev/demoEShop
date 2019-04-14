@@ -4,8 +4,10 @@
     using Microsoft.eShopWeb.Tests.Common.Builders;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
 
     [TestClass]
+    [ExcludeFromCodeCoverage]
     public class OrderTotal
     {
         private decimal _testUnitPrice = 42m;

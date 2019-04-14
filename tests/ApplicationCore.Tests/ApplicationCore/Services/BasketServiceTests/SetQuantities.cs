@@ -7,8 +7,10 @@
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Moq;
     using System;
+    using System.Diagnostics.CodeAnalysis;
 
     [TestClass]
+    [ExcludeFromCodeCoverage]
     public class SetQuantities
     {
         private int _invalidId = -1;

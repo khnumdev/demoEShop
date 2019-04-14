@@ -4,9 +4,11 @@
     using Microsoft.eShopWeb.ApplicationCore.Specifications;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
 
     [TestClass]
+    [ExcludeFromCodeCoverage]
     public class BasketWithItems
     {
         private int _testBasketId = 123;

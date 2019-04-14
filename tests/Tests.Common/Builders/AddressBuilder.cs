@@ -1,7 +1,9 @@
 ﻿namespace Microsoft.eShopWeb.Tests.Common.Builders
 {
     using Microsoft.eShopWeb.ApplicationCore.Entities.OrderAggregate;
+    using System.Diagnostics.CodeAnalysis;
 
+    [ExcludeFromCodeCoverage]
     public class AddressBuilder
     {
         private Address _address;

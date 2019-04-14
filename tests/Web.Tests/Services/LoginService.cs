@@ -6,9 +6,11 @@
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using System;
+    using System.Diagnostics.CodeAnalysis;
     using System.Threading.Tasks;
 
     [TestClass]
+    [ExcludeFromCodeCoverage]
     public class LoginService
     {
         [TestMethod]
@@ -51,7 +53,6 @@
                 {
                 }
             }
-
         }
     }
 }

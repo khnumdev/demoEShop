@@ -3,11 +3,14 @@
     using Microsoft.AspNetCore.Mvc.Testing;
     using Microsoft.eShopWeb.Web;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using System.Diagnostics.CodeAnalysis;
     using System.Net;
     using System.Net.Http;
     using System.Threading.Tasks;
 
     [TestClass]
+    [ExcludeFromCodeCoverage]
+    [TestCategory("Functional")]
     public class OrderIndexOnGet
     {
         readonly HttpClient _client;

@@ -5,9 +5,11 @@
     using Microsoft.eShopWeb.ApplicationCore.Services;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Moq;
+    using System.Diagnostics.CodeAnalysis;
     using System.Threading.Tasks;
 
     [TestClass]
+    [ExcludeFromCodeCoverage]
     public class DeleteBasket
     {
         private Mock<IAsyncRepository<Basket>> _mockBasketRepo;

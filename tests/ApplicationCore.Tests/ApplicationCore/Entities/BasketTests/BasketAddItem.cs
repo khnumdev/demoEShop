@@ -2,9 +2,11 @@
 {
     using Microsoft.eShopWeb.ApplicationCore.Entities.BasketAggregate;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
 
     [TestClass]
+    [ExcludeFromCodeCoverage]
     public class BasketAddItem
     {
         private int _testCatalogItemId = 123;

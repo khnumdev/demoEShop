@@ -1,7 +1,9 @@
 ﻿namespace Microsoft.eShopWeb.Tests.Common.Builders
 {
     using Microsoft.eShopWeb.ApplicationCore.Entities.BasketAggregate;
+    using System.Diagnostics.CodeAnalysis;
 
+    [ExcludeFromCodeCoverage]
     public class BasketBuilder
     {
         private Basket _basket;

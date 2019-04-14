@@ -4,11 +4,14 @@
     using Microsoft.eShopWeb.Web.ViewModels;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Newtonsoft.Json;
+    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
     using System.Net.Http;
     using System.Threading.Tasks;
 
     [TestClass]
+    [ExcludeFromCodeCoverage]
+    [TestCategory("Functional")]
     public class ApiCatalogControllerList
     {
         readonly HttpClient _client;
