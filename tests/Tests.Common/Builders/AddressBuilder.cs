@@ -1,4 +1,4 @@
-﻿namespace Microsoft.eShopWeb.ApplicationCore.Tests.Builders
+﻿namespace Microsoft.eShopWeb.Tests.Common.Builders
 {
     using Microsoft.eShopWeb.ApplicationCore.Entities.OrderAggregate;
 
