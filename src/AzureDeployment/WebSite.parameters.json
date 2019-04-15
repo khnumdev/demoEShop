@@ -4,6 +4,9 @@
   "parameters": {
     "hostingPlanName": {
       "value": null
+    },
+    "websiteName": {
+      "value": null
     }
   }
 }
