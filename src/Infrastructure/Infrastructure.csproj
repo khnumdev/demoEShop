@@ -3,6 +3,8 @@
 	<PropertyGroup>
 		<TargetFramework>netstandard2.0</TargetFramework>
 		<RootNamespace>Microsoft.eShopWeb.Infrastructure</RootNamespace>
+    <!-- This is done to prevent failures on SonarQube integration https://stackoverflow.com/questions/51230892/sonarqube-dotnet-core-how-to-avoid-the-duplicate-guid-error-without-altering-th-->
+    <ProjectGuid>{7C461394-ABDC-43CD-A798-71249C58BA67}</ProjectGuid>
 	</PropertyGroup>
 
 	<ItemGroup>

@@ -5,6 +5,8 @@
     <RootNamespace>Microsoft.eShopWeb.Web</RootNamespace>
     <UserSecretsId>aspnet-Web2-1FA3F72E-E7E3-4360-9E49-1CCCD7FE85F7</UserSecretsId>
     <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
+    <!-- This is done to prevent failures on SonarQube integration https://stackoverflow.com/questions/51230892/sonarqube-dotnet-core-how-to-avoid-the-duplicate-guid-error-without-altering-th-->
+    <ProjectGuid>{227CF035-29B0-448D-97E4-944F9EA850E5}</ProjectGuid>
   </PropertyGroup>
 
   <ItemGroup>
