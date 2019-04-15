@@ -64,17 +64,21 @@ namespace Microsoft.eShopWeb.Web
 
         public void ConfigureProductionServices(IServiceCollection services)
         {
-            // use real database
-            // Requires LocalDB which can be installed with SQL Server Express 2016
-            // https://www.microsoft.com/en-us/download/details.aspx?id=54284
-            services.AddDbContext<CatalogContext>(c =>
-                c.UseSqlServer(Configuration.GetConnectionString("CatalogConnection")));
+            // use in-memory database
+            ConfigureInMemoryDatabases(services);
 
-            // Add Identity DbContext
-            services.AddDbContext<AppIdentityDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("IdentityConnection")));
+            //// To simplify the deployment, a memory database is used
+            //// use real database
+            //// Requires LocalDB which can be installed with SQL Server Express 2016
+            //// https://www.microsoft.com/en-us/download/details.aspx?id=54284
+            //services.AddDbContext<CatalogContext>(c =>
+            //    c.UseSqlServer(Configuration.GetConnectionString("CatalogConnection")));
 
-            ConfigureServices(services);
+            //// Add Identity DbContext
+            //services.AddDbContext<AppIdentityDbContext>(options =>
+            //    options.UseSqlServer(Configuration.GetConnectionString("IdentityConnection")));
+
+            //ConfigureServices(services);
         }
 
 

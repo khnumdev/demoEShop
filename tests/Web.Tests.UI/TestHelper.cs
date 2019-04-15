@@ -13,7 +13,7 @@
 
         public static IWebDriver GetDriver()
         {
-            string browser = "IE";
+            string browser = "Chrome";
             switch (browser)
             {
                 case "Chrome":
