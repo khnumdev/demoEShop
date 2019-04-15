@@ -1,6 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <!-- File name extension must be .runsettings -->
 <RunSettings>
+  <MSTest>
+    <AppUrl>http://localhost:17469</AppUrl>
+  </MSTest>
+  <TestRunParameters>
+    <Parameter name="AppUrl" value="http://localhost:17469" />
+  </TestRunParameters>
   <DataCollectionRunSettings>
     <DataCollectors>
       <DataCollector friendlyName="Code Coverage" uri="datacollector://Microsoft/CodeCoverage/2.0" assemblyQualifiedName="Microsoft.VisualStudio.Coverage.DynamicCoverageDataCollector, Microsoft.VisualStudio.TraceCollector, Version=11.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
@@ -103,7 +109,4 @@ Included items must then not match any entries in the exclude list to remain inc
       </DataCollector>
     </DataCollectors>
   </DataCollectionRunSettings>
-  <TestRunParameters>
-    <Parameter name="AppUrl" value="http://localhost:17469" />
-  </TestRunParameters>
 </RunSettings>

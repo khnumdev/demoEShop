@@ -26,8 +26,10 @@
     <None Include="Deployment.targets">
       <Visible>False</Visible>
     </None>
-    <Content Include="WebSite.json" />
-    <Content Include="WebSite.parameters.json" />
+    <Content Include="Templates\WebSite.json" />
+    <None Include="Scripts\Deploy.ps1" />
+    <None Include="Scripts\Functions\DeployTemplate.ps1" />
+    <None Include="Scripts\Utils\UpdateRunSettings.ps1" />
   </ItemGroup>
   <Target Name="GetReferenceAssemblyPaths" />
 </Project>
