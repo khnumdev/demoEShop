@@ -1,0 +1,450 @@
+{
+    "options": [
+        {
+            "enabled": true,
+            "definition": {
+                "id": "5d58cc01-7c75-450c-be18-a388ddb129ec"
+            },
+            "inputs": {
+                "branchFilters": "[\"+refs/heads/*\"]",
+                "additionalFields": "{}"
+            }
+        },
+        {
+            "enabled": false,
+            "definition": {
+                "id": "a9db38f9-9fdc-478c-b0f9-464221e58316"
+            },
+            "inputs": {
+                "workItemType": "Task",
+                "assignToRequestor": "true",
+                "additionalFields": "{}"
+            }
+        }
+    ],
+    "triggers": [
+        {
+            "branchFilters": [
+                "+refs/heads/master"
+            ],
+            "pathFilters": [],
+            "batchChanges": false,
+            "maxConcurrentBuildsPerBranch": 1,
+            "pollingInterval": 0,
+            "triggerType": 2
+        }
+    ],
+    "variables": {
+        "BuildConfiguration": {
+            "value": "Release",
+            "allowOverride": true
+        },
+        "BuildPlatform": {
+            "value": "any cpu",
+            "allowOverride": true
+        },
+        "system.debug": {
+            "value": "false",
+            "allowOverride": true
+        }
+    },
+    "retentionRules": [
+        {
+            "branches": [
+                "+refs/heads/*"
+            ],
+            "artifacts": [],
+            "artifactTypesToDelete": [
+                "FilePath",
+                "SymbolStore"
+            ],
+            "daysToKeep": 10,
+            "minimumToKeep": 1,
+            "deleteBuildRecord": true,
+            "deleteTestResults": true
+        }
+    ],
+    "properties": {},
+    "tags": [],
+    "buildNumberFormat": "$(date:yyyyMMdd)$(rev:.r)",
+    "jobAuthorizationScope": 1,
+    "jobTimeoutInMinutes": 60,
+    "jobCancelTimeoutInMinutes": 5,
+    "process": {
+        "phases": [
+            {
+                "steps": [
+                    {
+                        "environment": {},
+                        "enabled": true,
+                        "continueOnError": false,
+                        "alwaysRun": false,
+                        "displayName": "Restore",
+                        "timeoutInMinutes": 0,
+                        "condition": "succeeded()",
+                        "task": {
+                            "id": "5541a522-603c-47ad-91fc-a4b1d163081b",
+                            "versionSpec": "2.*",
+                            "definitionType": "task"
+                        },
+                        "inputs": {
+                            "command": "restore",
+                            "publishWebProjects": "true",
+                            "projects": "**/Web.csproj",
+                            "custom": "",
+                            "arguments": "",
+                            "publishTestResults": "true",
+                            "zipAfterPublish": "true",
+                            "modifyOutputPath": "true",
+                            "selectOrConfig": "select",
+                            "feedRestore": "",
+                            "includeNuGetOrg": "true",
+                            "nugetConfigPath": "",
+                            "externalEndpoints": "",
+                            "noCache": "false",
+                            "packagesDirectory": "",
+                            "verbosityRestore": "Detailed",
+                            "searchPatternPush": "$(Build.ArtifactStagingDirectory)/*.nupkg",
+                            "nuGetFeedType": "internal",
+                            "feedPublish": "",
+                            "publishPackageMetadata": "true",
+                            "externalEndpoint": "",
+                            "searchPatternPack": "**/*.csproj",
+                            "configurationToPack": "$(BuildConfiguration)",
+                            "outputDir": "$(Build.ArtifactStagingDirectory)",
+                            "nobuild": "false",
+                            "versioningScheme": "off",
+                            "versionEnvVar": "",
+                            "requestedMajorVersion": "1",
+                            "requestedMinorVersion": "0",
+                            "requestedPatchVersion": "0",
+                            "buildProperties": "",
+                            "verbosityPack": "Detailed",
+                            "workingDirectory": ""
+                        }
+                    },
+                    {
+                        "environment": {},
+                        "enabled": true,
+                        "continueOnError": false,
+                        "alwaysRun": false,
+                        "displayName": "Prepare analysis on SonarCloud",
+                        "timeoutInMinutes": 0,
+                        "condition": "succeeded()",
+                        "task": {
+                            "id": "14d9cde6-c1da-4d55-aa01-2965cd301255",
+                            "versionSpec": "1.*",
+                            "definitionType": "task"
+                        },
+                        "inputs": {
+                            "SonarCloud": "",
+                            "organization": "",
+                            "scannerMode": "MSBuild",
+                            "configMode": "file",
+                            "configFile": "sonar-project.properties",
+                            "cliProjectKey": "",
+                            "projectKey": "",
+                            "cliProjectName": "",
+                            "projectName": "",
+                            "cliProjectVersion": "1.0",
+                            "projectVersion": "1.0",
+                            "cliSources": ".",
+                            "extraProperties": "# Additional properties that will be passed to the scanner, \n# Put one key=value per line, example:\n# sonar.exclusions=**/*.bin"
+                        }
+                    },
+                    {
+                        "environment": {},
+                        "enabled": true,
+                        "continueOnError": false,
+                        "alwaysRun": false,
+                        "displayName": "Build",
+                        "timeoutInMinutes": 0,
+                        "condition": "succeeded()",
+                        "task": {
+                            "id": "5541a522-603c-47ad-91fc-a4b1d163081b",
+                            "versionSpec": "2.*",
+                            "definitionType": "task"
+                        },
+                        "inputs": {
+                            "command": "build",
+                            "publishWebProjects": "true",
+                            "projects": "**/Web.csproj",
+                            "custom": "",
+                            "arguments": "--configuration $(BuildConfiguration)",
+                            "publishTestResults": "true",
+                            "zipAfterPublish": "true",
+                            "modifyOutputPath": "true",
+                            "selectOrConfig": "select",
+                            "feedRestore": "",
+                            "includeNuGetOrg": "true",
+                            "nugetConfigPath": "",
+                            "externalEndpoints": "",
+                            "noCache": "false",
+                            "packagesDirectory": "",
+                            "verbosityRestore": "Detailed",
+                            "searchPatternPush": "$(Build.ArtifactStagingDirectory)/*.nupkg",
+                            "nuGetFeedType": "internal",
+                            "feedPublish": "",
+                            "publishPackageMetadata": "true",
+                            "externalEndpoint": "",
+                            "searchPatternPack": "**/*.csproj",
+                            "configurationToPack": "$(BuildConfiguration)",
+                            "outputDir": "$(Build.ArtifactStagingDirectory)",
+                            "nobuild": "false",
+                            "versioningScheme": "off",
+                            "versionEnvVar": "",
+                            "requestedMajorVersion": "1",
+                            "requestedMinorVersion": "0",
+                            "requestedPatchVersion": "0",
+                            "buildProperties": "",
+                            "verbosityPack": "Detailed",
+                            "workingDirectory": ""
+                        }
+                    },
+                    {
+                        "environment": {},
+                        "enabled": true,
+                        "continueOnError": false,
+                        "alwaysRun": false,
+                        "displayName": "Run Code Analysis",
+                        "timeoutInMinutes": 0,
+                        "condition": "succeeded()",
+                        "task": {
+                            "id": "ce096e50-6155-4de8-8800-4221aaeed4a1",
+                            "versionSpec": "1.*",
+                            "definitionType": "task"
+                        },
+                        "inputs": {}
+                    },
+                    {
+                        "environment": {},
+                        "enabled": true,
+                        "continueOnError": false,
+                        "alwaysRun": false,
+                        "displayName": "Publish Quality Gate Result",
+                        "timeoutInMinutes": 0,
+                        "condition": "succeeded()",
+                        "task": {
+                            "id": "38b27399-a642-40af-bb7d-9971f69712e8",
+                            "versionSpec": "1.*",
+                            "definitionType": "task"
+                        },
+                        "inputs": {
+                            "pollingTimeoutSec": "300"
+                        }
+                    },
+                    {
+                        "environment": {},
+                        "enabled": true,
+                        "continueOnError": false,
+                        "alwaysRun": false,
+                        "displayName": "Test",
+                        "timeoutInMinutes": 0,
+                        "condition": "succeeded()",
+                        "task": {
+                            "id": "5541a522-603c-47ad-91fc-a4b1d163081b",
+                            "versionSpec": "2.*",
+                            "definitionType": "task"
+                        },
+                        "inputs": {
+                            "command": "test",
+                            "publishWebProjects": "true",
+                            "projects": "**/*[Tt]ests*/*.csproj\n**/*[Tt]ests.UI/*.csproj",
+                            "custom": "",
+                            "arguments": "--configuration $(BuildConfiguration) --collect \"Code coverage\" --filter \"TestCategory!=UI\"",
+                            "publishTestResults": "true",
+                            "zipAfterPublish": "true",
+                            "modifyOutputPath": "true",
+                            "selectOrConfig": "select",
+                            "feedRestore": "",
+                            "includeNuGetOrg": "true",
+                            "nugetConfigPath": "",
+                            "externalEndpoints": "",
+                            "noCache": "false",
+                            "packagesDirectory": "",
+                            "verbosityRestore": "Detailed",
+                            "searchPatternPush": "$(Build.ArtifactStagingDirectory)/*.nupkg",
+                            "nuGetFeedType": "internal",
+                            "feedPublish": "",
+                            "publishPackageMetadata": "true",
+                            "externalEndpoint": "",
+                            "searchPatternPack": "**/*.csproj",
+                            "configurationToPack": "$(BuildConfiguration)",
+                            "outputDir": "$(Build.ArtifactStagingDirectory)",
+                            "nobuild": "false",
+                            "versioningScheme": "off",
+                            "versionEnvVar": "",
+                            "requestedMajorVersion": "1",
+                            "requestedMinorVersion": "0",
+                            "requestedPatchVersion": "0",
+                            "buildProperties": "",
+                            "verbosityPack": "Detailed",
+                            "workingDirectory": ""
+                        }
+                    },
+                    {
+                        "environment": {},
+                        "enabled": true,
+                        "continueOnError": false,
+                        "alwaysRun": false,
+                        "displayName": "Publish",
+                        "timeoutInMinutes": 0,
+                        "condition": "succeeded()",
+                        "task": {
+                            "id": "5541a522-603c-47ad-91fc-a4b1d163081b",
+                            "versionSpec": "2.*",
+                            "definitionType": "task"
+                        },
+                        "inputs": {
+                            "command": "publish",
+                            "publishWebProjects": "True",
+                            "projects": "**/*.csproj",
+                            "custom": "",
+                            "arguments": "--configuration $(BuildConfiguration) --output $(build.artifactstagingdirectory)",
+                            "publishTestResults": "true",
+                            "zipAfterPublish": "True",
+                            "modifyOutputPath": "true",
+                            "selectOrConfig": "select",
+                            "feedRestore": "",
+                            "includeNuGetOrg": "true",
+                            "nugetConfigPath": "",
+                            "externalEndpoints": "",
+                            "noCache": "false",
+                            "packagesDirectory": "",
+                            "verbosityRestore": "Detailed",
+                            "searchPatternPush": "$(Build.ArtifactStagingDirectory)/*.nupkg",
+                            "nuGetFeedType": "internal",
+                            "feedPublish": "",
+                            "publishPackageMetadata": "true",
+                            "externalEndpoint": "",
+                            "searchPatternPack": "**/*.csproj",
+                            "configurationToPack": "$(BuildConfiguration)",
+                            "outputDir": "$(Build.ArtifactStagingDirectory)",
+                            "nobuild": "false",
+                            "versioningScheme": "off",
+                            "versionEnvVar": "",
+                            "requestedMajorVersion": "1",
+                            "requestedMinorVersion": "0",
+                            "requestedPatchVersion": "0",
+                            "buildProperties": "",
+                            "verbosityPack": "Detailed",
+                            "workingDirectory": ""
+                        }
+                    },
+                    {
+                        "environment": {},
+                        "enabled": true,
+                        "continueOnError": false,
+                        "alwaysRun": false,
+                        "displayName": "Copy UI Test Files",
+                        "timeoutInMinutes": 0,
+                        "condition": "succeeded()",
+                        "task": {
+                            "id": "5bfb729a-a7c8-4a78-a7c3-8d717bb7c13c",
+                            "versionSpec": "2.*",
+                            "definitionType": "task"
+                        },
+                        "inputs": {
+                            "SourceFolder": "$(System.DefaultWorkingDirectory)",
+                            "Contents": "*.runsettings\n$(System.DefaultWorkingDirectory)\\tests\\Web.Tests.UI\\**",
+                            "TargetFolder": "$(build.artifactstagingdirectory)\\UITests",
+                            "CleanTargetFolder": "false",
+                            "OverWrite": "false",
+                            "flattenFolders": "false"
+                        }
+                    },
+                    {
+                        "environment": {},
+                        "enabled": true,
+                        "continueOnError": false,
+                        "alwaysRun": false,
+                        "displayName": "Copy Deployment files",
+                        "timeoutInMinutes": 0,
+                        "condition": "succeeded()",
+                        "task": {
+                            "id": "5bfb729a-a7c8-4a78-a7c3-8d717bb7c13c",
+                            "versionSpec": "2.*",
+                            "definitionType": "task"
+                        },
+                        "inputs": {
+                            "SourceFolder": "src/AzureDeployment",
+                            "Contents": "**",
+                            "TargetFolder": "$(build.artifactstagingdirectory)\\Deployment",
+                            "CleanTargetFolder": "false",
+                            "OverWrite": "false",
+                            "flattenFolders": "false"
+                        }
+                    },
+                    {
+                        "environment": {},
+                        "enabled": true,
+                        "continueOnError": false,
+                        "alwaysRun": true,
+                        "displayName": "Publish Artifact",
+                        "timeoutInMinutes": 0,
+                        "condition": "succeededOrFailed()",
+                        "task": {
+                            "id": "2ff763a7-ce83-4e1f-bc89-0ae63477cebe",
+                            "versionSpec": "1.*",
+                            "definitionType": "task"
+                        },
+                        "inputs": {
+                            "PathtoPublish": "$(build.artifactstagingdirectory)",
+                            "ArtifactName": "drop",
+                            "ArtifactType": "Container",
+                            "TargetPath": "\\\\my\\share\\$(Build.DefinitionName)\\$(Build.BuildNumber)",
+                            "Parallel": "false",
+                            "ParallelCount": "8"
+                        }
+                    }
+                ],
+                "name": "Agent job 1",
+                "refName": "Job_1",
+                "condition": "succeeded()",
+                "target": {
+                    "executionOptions": {
+                        "type": 0
+                    },
+                    "allowScriptsAuthAccessOption": false,
+                    "type": 1
+                },
+                "jobAuthorizationScope": 1
+            }
+        ],
+        "type": 1
+    },
+    "repository": {
+        "properties": {
+            "cleanOptions": "0",
+            "labelSources": "0",
+            "labelSourcesFormat": "$(build.buildNumber)",
+            "reportBuildStatus": "true",
+            "gitLfsSupport": "false",
+            "skipSyncSource": "false",
+            "checkoutNestedSubmodules": "false",
+            "fetchDepth": "0"
+        },
+        "id": "d654724c-c975-44d7-b6d4-fc23258ab0a5",
+        "type": "TfsGit",
+        "name": "",
+        "url": "",
+        "defaultBranch": "refs/heads/master",
+        "clean": "false",
+        "checkoutSubmodules": false
+    },
+    "processParameters": {},
+    "quality": 1,
+    "drafts": [],
+    "queue": {
+        "name": "Hosted VS2017",
+        "pool": {
+            "id": 4,
+            "name": "Hosted VS2017",
+            "isHosted": true
+        }
+    },
+    "id": 9,
+    "name": "[CI] eDemoShop2",
+    "path": "\\",
+    "type": 2
+}
