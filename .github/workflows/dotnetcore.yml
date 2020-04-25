@@ -6,6 +6,10 @@ on:
   pull_request:
     branches: [ master ]
 
+env:
+  DOTNET_VERSION: '2.2.106'           # set this to the dot net version to use
+  CONFIGURATION: 'Release'
+
 jobs:
   build:
 
@@ -16,12 +20,10 @@ jobs:
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: 2.2.106
-    - name: Install dependencies
-      run: dotnet restore
-    - name: Build
-      run: dotnet build --configuration Release --no-restore
-    - name: Test
-      run: dotnet test --no-restore --configuration Release --collect "Code coverage" --filter "TestCategory!=UI"
-    - name: Publish
-      run: dotnet publish --configuration Release --output drop\web.zip
+        dotnet-version: ${{ env.DOTNET_VERSION }}
+    - name: dotnet restore, build, test and publish
+      run: |
+           dotnet restore
+           dotnet build --configuration ${{ env.CONFIGURATION }} --no-restore
+           dotnet test --no-restore --configuration  ${{ env.CONFIGURATION }} --collect "Code coverage" --filter "TestCategory!=UI"
+           dotnet publish --no-restore --configuration ${{ env.CONFIGURATION }} --output 'drop\web.zip'
