@@ -24,4 +24,4 @@ jobs:
     - name: Test
       run: dotnet test --no-restore --configuration Release --collect "Code coverage" --filter "TestCategory!=UI"
     - name: Publish
-      run: dotnet publish --configuration Release --output $(build.artifactstagingdirectory)
+      run: dotnet publish --configuration Release --output drop\web.zip
