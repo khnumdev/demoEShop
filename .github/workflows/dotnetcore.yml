@@ -7,7 +7,7 @@ on:
     branches: [ master ]
 
 env:
-  DOTNET_VERSION: '2.2.106'           # set this to the dot net version to use
+  DOTNET_VERSION: '2.2.106'
   CONFIGURATION: 'Release'
 
 jobs:
@@ -24,6 +24,6 @@ jobs:
     - name: dotnet restore, build, test and publish
       run: |
            dotnet restore
-           dotnet build --configuration ${{ env.CONFIGURATION }} --no-restore
+           dotnet build src\Web\Web.csproj--configuration ${{ env.CONFIGURATION }} --no-restore
            dotnet test --no-restore --configuration  ${{ env.CONFIGURATION }} --collect "Code coverage" --filter "TestCategory!=UI"
-           dotnet publish --no-restore --configuration ${{ env.CONFIGURATION }} --output 'drop\web.zip'
+           dotnet publish '${{GITHUB_WORKSPACE}}/src/Web/Web.csproj' --no-restore --configuration ${{ env.CONFIGURATION }} --output 'drop\web.zip'
