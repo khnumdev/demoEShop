@@ -22,6 +22,6 @@ jobs:
     - name: Build
       run: dotnet build --configuration Release --no-restore
     - name: Test
-      run: dotnet test --no-restore --configuration $(BuildConfiguration) --collect "Code coverage" --filter "TestCategory!=UI"
+      run: dotnet test --no-restore --configuration Release --collect "Code coverage" --filter "TestCategory!=UI"
     - name: Publish
-      run: dotnet publish --configuration $(BuildConfiguration) --output $(build.artifactstagingdirectory)
+      run: dotnet publish --configuration Release --output $(build.artifactstagingdirectory)
