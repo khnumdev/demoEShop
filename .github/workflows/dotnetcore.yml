@@ -26,7 +26,7 @@ jobs:
            dotnet restore
            dotnet build --configuration ${{ env.CONFIGURATION }} --no-restore
            dotnet test --no-restore --configuration  ${{ env.CONFIGURATION }} --collect "Code coverage" --filter "TestCategory!=UI"
-           dotnet publish './src/Web/Web.csproj' --no-restore --configuration ${{ env.CONFIGURATION }} --output './drop/web.zip'
+           dotnet publish './src/Web/Web.csproj' --no-restore --configuration ${{ env.CONFIGURATION }} --output '${{env.GITHUB_WORKSPACE}}/drop/web.zip'
     - name: Upload artifact
       uses: actions/upload-artifact@v1.0.0
       with:
