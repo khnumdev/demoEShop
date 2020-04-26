@@ -1,5 +1,9 @@
 # Demo eShopOnWeb
 
+## CI/CD pipeline status
+![.NET Core](https://github.com/khnumdev/demoEShop/workflows/.NET%20Core/badge.svg)
+
+## Summary
 This is a custom implementation of eShopOnWeb application (https://github.com/dotnet-architecture/eShopOnWeb).
 
 The differences between this one and the original are:
